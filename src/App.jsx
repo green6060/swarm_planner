@@ -98,78 +98,78 @@ export default function App() {
   return (
     <Authenticator>
       {({ signOut }) => (
-        <Flex alignItems={"space-between"} width="100%">
-          <Flex direction="column" width="50%">
-            <Heading marginBottom="10%" className="swarm-header" level={2}>
-              Swarm Planner
-            </Heading>
-            <Heading className="swarm-header" level={6}>
-              Champions
-            </Heading>
-            <View className="champion-gallery">
-              <ChampionSelectContainer
-                champion="Jinx"
-                plannerState={{ planner, setPlanner }}
-              />
-              <ChampionSelectContainer
-                champion="Seraphine"
-                plannerState={{ planner, setPlanner }}
-              />
-              <ChampionSelectContainer
-                champion="Leona"
-                plannerState={{ planner, setPlanner }}
-              />
-              <ChampionSelectContainer
-                champion="Illaoi"
-                plannerState={{ planner, setPlanner }}
-              />
-              <ChampionSelectContainer
-                champion="Briar"
-                plannerState={{ planner, setPlanner }}
-              />
-              <ChampionSelectContainer
-                champion="Yasuo"
-                plannerState={{ planner, setPlanner }}
-              />
-              <ChampionSelectContainer
-                champion="Riven"
-                plannerState={{ planner, setPlanner }}
-              />
-              <ChampionSelectContainer
-                champion="Aurora"
-                plannerState={{ planner, setPlanner }}
-              />
-              <ChampionSelectContainer
-                champion="Xayah"
-                plannerState={{ planner, setPlanner }}
-              />
-            </View>
-            {/* <Button type="submit" variation="primary">
+        <Flex direction={"column"}>
+          <Flex>
+            <Button type="submit" variation="primary">
               Save Build
-            </Button> */}
+            </Button>
             <Button variation="primary" onClick={signOut}>
               Sign Out
             </Button>
           </Flex>
-          <Flex direction="column" width="50%">
-            <Heading
-              textAlign="center"
-              marginBottom="10%"
-              className="swarm-header"
-              level={2}
-            >
-              Current Build
-            </Heading>
-            <Heading className="swarm-header" level={6}>
-              Champion
-            </Heading>
-            <View style={{ display: "flex", flexFlow: "row wrap" }}>
-              {planner.champion ? (
+          <Flex>
+            <Flex direction="column" width="50%">
+              <Heading marginBottom="10%" className="swarm-header" level={2}>
+                Swarm Planner
+              </Heading>
+              <Heading className="swarm-header" level={6}>
+                Champions
+              </Heading>
+              <View className="champion-gallery">
+                <ChampionSelectContainer
+                  champion="Jinx"
+                  plannerState={{ planner, setPlanner }}
+                />
+                <ChampionSelectContainer
+                  champion="Seraphine"
+                  plannerState={{ planner, setPlanner }}
+                />
+                <ChampionSelectContainer
+                  champion="Leona"
+                  plannerState={{ planner, setPlanner }}
+                />
+                <ChampionSelectContainer
+                  champion="Illaoi"
+                  plannerState={{ planner, setPlanner }}
+                />
+                <ChampionSelectContainer
+                  champion="Briar"
+                  plannerState={{ planner, setPlanner }}
+                />
+                <ChampionSelectContainer
+                  champion="Yasuo"
+                  plannerState={{ planner, setPlanner }}
+                />
+                <ChampionSelectContainer
+                  champion="Riven"
+                  plannerState={{ planner, setPlanner }}
+                />
+                <ChampionSelectContainer
+                  champion="Aurora"
+                  plannerState={{ planner, setPlanner }}
+                />
+                <ChampionSelectContainer
+                  champion="Xayah"
+                  plannerState={{ planner, setPlanner }}
+                />
+              </View>
+            </Flex>
+            <Flex direction="column" width="50%">
+              <Heading
+                textAlign="center"
+                marginBottom="10%"
+                className="swarm-header"
+                level={2}
+              >
+                Current Build
+              </Heading>
+              <Heading className="swarm-header" level={6}>
+                Champion
+              </Heading>
+              <View style={{ display: "flex", flexFlow: "row wrap" }}>
                 <ChampionDisplayContainer champion={planner.champion} />
-              ) : (
-                <ChampionSelectContainer champion={""} />
-              )}
-            </View>
+              </View>
+            </Flex>
           </Flex>
         </Flex>
       )}
