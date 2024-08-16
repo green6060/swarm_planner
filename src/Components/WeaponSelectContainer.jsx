@@ -29,6 +29,7 @@ export default function WeaponSelectContainer({ weapon, plannerState }) {
       !plannerState.planner.weapon4 ||
       !plannerState.planner.weapon5
     ) {
+      // If there are, check if the weapon is already in the planner
       if (
         !(
           plannerState.planner.weapon1 === weapon ||
@@ -38,7 +39,6 @@ export default function WeaponSelectContainer({ weapon, plannerState }) {
           plannerState.planner.weapon5 === weapon
         )
       ) {
-        // If there are, check if the weapon is already in the planner
         // If there are, fill in the next empty slot
         plannerState.setPlanner({
           ...plannerState.planner,
