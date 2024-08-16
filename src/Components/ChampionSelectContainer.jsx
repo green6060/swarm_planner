@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import { View } from "@aws-amplify/ui-react";
-import { getThumbnail } from "../helper/common";
+import { getChampionThumbnail } from "../helper/common";
 
-export default function ChampionContainer({ champion, plannerState }) {
+export default function ChampionSelectContainer({ champion, plannerState }) {
   return (
     <View className="champion-select-container">
       <button
@@ -14,13 +14,11 @@ export default function ChampionContainer({ champion, plannerState }) {
         }
       >
         <img
-          src={getThumbnail(champion)}
+          src={getChampionThumbnail(champion)}
           alt={`${champion} Champion Thumbnail`}
         />
       </button>
-      <p className="image-caption">
-        {champion ? `${champion}` : "Choose a Champ"}
-      </p>
+      <p className="image-caption">{`${champion}`}</p>
     </View>
   );
 }
