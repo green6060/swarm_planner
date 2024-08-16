@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import { View, Flex, Heading, Text, Image } from "@aws-amplify/ui-react";
-import { getThumbnail } from "../helper/common";
+import { View, Flex, Heading, Text } from "@aws-amplify/ui-react";
+import { getChampionThumbnail } from "../helper/common";
 
 export default function ChampionDisplayContainer({ champion }) {
   const getPassiveName = (champion) => {
@@ -54,18 +54,19 @@ export default function ChampionDisplayContainer({ champion }) {
   return (
     <Flex>
       <View className="champion-display-container">
-        <Image
-          width={"100%"}
-          src={getThumbnail(champion)}
-          alt={`${champion} Champion Thumbnail`}
-        />
+        {getChampionThumbnail(champion) && (
+          <img
+            src={getChampionThumbnail(champion)}
+            alt={`${champion} Champion Thumbnail`}
+          />
+        )}
       </View>
       <View marginTop="1em" direction="column" width="75%">
         <Heading className="swarm-header" level={4}>
           {champion}
         </Heading>
         <View>
-          {getPassiveName(champion) ? (
+          {getPassiveName(champion) && (
             <>
               <Heading className="swarm-header" level={6}>
                 Passive:
@@ -77,10 +78,6 @@ export default function ChampionDisplayContainer({ champion }) {
                 {getPassiveDescription(champion)}
               </Text>
             </>
-          ) : (
-            <Heading className="swarm-header" level={5}>
-              Select a Champion
-            </Heading>
           )}
         </View>
       </View>

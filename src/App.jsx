@@ -12,8 +12,13 @@ import "./App.css";
 // import { uploadData } from "aws-amplify/storage";
 import { generateClient } from "aws-amplify/data";
 import outputs from "../amplify_outputs.json";
-import ChampionSelectContainer from "./Components/ChampionSelectContainer";
-import ChampionDisplayContainer from "./Components/ChampionDisplayContainer";
+import {
+  ChampionDisplayContainer,
+  ChampionSelectContainer,
+  WeaponSelectContainer,
+  WeaponDisplayContainer,
+} from "./Components";
+import { createInitialPlannerState, weaponsArray } from "./helper/common";
 /**
  * @type {import('aws-amplify/data').Client<import('../amplify/data/resource').Schema>}
  */
@@ -24,34 +29,11 @@ const client = generateClient({
 });
 
 export default function App() {
-  const [planner, setPlanner] = useState({
-    buildName: "",
-    buildDescripton: "",
-    champion: "",
-    weaponOne: "",
-    weaponTwo: "",
-    weaponThree: "",
-    weaponFour: "",
-    weaponFive: "",
-    passiveOne: "",
-    passiveTwo: "",
-    passiveThree: "",
-    passiveFour: "",
-    passiveFive: "",
-    passiveSix: "",
-    augmentOne: "",
-    augmentTwo: "",
-    augmentThree: "",
-    augmentFour: "",
-  });
+  const [planner, setPlanner] = useState(createInitialPlannerState);
 
   useEffect(() => {
     fetchPlanner();
   }, []);
-
-  useEffect(() => {
-    console.log("should rerender - parent");
-  }, [planner.champion]);
 
   async function fetchPlanner() {
     const { data: builds } = await client.models.Note.list();
@@ -95,20 +77,37 @@ export default function App() {
   //   event.target.reset();
   // }
 
+  const clearPlanner = () => {
+    setPlanner(createInitialPlannerState);
+  };
+
   return (
     <Authenticator>
       {({ signOut }) => (
         <Flex direction={"column"}>
           <Flex>
-            <Button type="submit" variation="primary">
-              Save Build
-            </Button>
-            <Button variation="primary" onClick={signOut}>
-              Sign Out
+            <Flex width="50%">
+              <Button
+                type="submit"
+                variation="primary"
+                onClick={() =>
+                  window.alert(
+                    "Thanks for trying this button out! It intentionally does nothing... for now :) "
+                  )
+                }
+              >
+                Save Build
+              </Button>
+              <Button variation="primary" onClick={signOut}>
+                Sign Out
+              </Button>
+            </Flex>
+            <Button variation="primary" onClick={clearPlanner}>
+              Clear
             </Button>
           </Flex>
-          <Flex>
-            <Flex direction="column" width="50%">
+          <Flex id="championRow">
+            <Flex id="championSelect" direction="column" width="50%">
               <Heading marginBottom="10%" className="swarm-header" level={2}>
                 Swarm Planner
               </Heading>
@@ -154,7 +153,7 @@ export default function App() {
                 />
               </View>
             </Flex>
-            <Flex direction="column" width="50%">
+            <Flex id="championDisplay" direction="column" width="50%">
               <Heading
                 textAlign="center"
                 marginBottom="10%"
@@ -168,6 +167,59 @@ export default function App() {
               </Heading>
               <View style={{ display: "flex", flexFlow: "row wrap" }}>
                 <ChampionDisplayContainer champion={planner.champion} />
+              </View>
+            </Flex>
+          </Flex>
+          <Flex id="weaponRow">
+            <Flex id="weaponSelect" direction="column" width="50%">
+              <Heading className="swarm-header" level={6}>
+                Weapon Select
+              </Heading>
+              <View className="champion-gallery">
+                {weaponsArray.map((weapon, index) => (
+                  <WeaponSelectContainer
+                    key={index}
+                    weapon={weapon}
+                    plannerState={{ planner, setPlanner }}
+                  />
+                ))}
+              </View>
+            </Flex>
+            <Flex id="weaponDisplay" direction="column" width="50%">
+              <Heading className="swarm-header" level={6}>
+                Weapons
+              </Heading>
+              <View className="champion-gallery">
+                {planner.weapon1 && (
+                  <WeaponDisplayContainer
+                    weapon={planner.weapon1}
+                    plannerState={{ planner, setPlanner }}
+                  />
+                )}
+                {planner.weapon2 && (
+                  <WeaponDisplayContainer
+                    weapon={planner.weapon2}
+                    plannerState={{ planner, setPlanner }}
+                  />
+                )}
+                {planner.weapon3 && (
+                  <WeaponDisplayContainer
+                    weapon={planner.weapon3}
+                    plannerState={{ planner, setPlanner }}
+                  />
+                )}
+                {planner.weapon4 && (
+                  <WeaponDisplayContainer
+                    weapon={planner.weapon4}
+                    plannerState={{ planner, setPlanner }}
+                  />
+                )}
+                {planner.weapon5 && (
+                  <WeaponDisplayContainer
+                    weapon={planner.weapon5}
+                    plannerState={{ planner, setPlanner }}
+                  />
+                )}
               </View>
             </Flex>
           </Flex>

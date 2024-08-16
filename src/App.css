@@ -48,6 +48,15 @@
   flex-flow: row wrap;
 }
 
+.champion-select-active-container {
+  margin: 1em 1em 1em 0;
+  flex: 0 1 80px;
+}
+
+.champion-select-active-container img {
+  border: 5px, solid, rgb(186, 149, 64);
+}
+
 .champion-select-container {
   margin: 1em 1em 1em 0;
   flex: 0 1 80px;
